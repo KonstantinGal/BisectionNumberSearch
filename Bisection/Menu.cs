@@ -37,27 +37,22 @@ namespace Bisection
             var array = new int[100];
             var count = 1;
 
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = i;
-            }
+            for (var i = 0; i < array.Length; i++) array[i] = i;
 
             return Search(array, count, humanNumber);
         }
 
-        private string Search(int[] array, int count, int humanNumber, int machineNumber = 0)
-        {
-            machineNumber = (int)array.Average();
+        //Recursive search, passing an array we work with, current count, user's input.
 
-            if (humanNumber == machineNumber)
-            {
-                return $"Machine guessed human's number :{machineNumber}, in {count} attempts.";
-            }
+        private string Search(int[] array, int count, int humanNumber)
+        {
+            var machineNumber = (int)array.Average();
+            int indexBuffer;
+
+            if (humanNumber == machineNumber) return $"Machine guessed human's number :{machineNumber}, in {count} attempts.";
 
             var tempArray = new int[array.Length / 2];
             var indexZero = 0;
-
-            int indexBuffer;
 
             if (humanNumber > machineNumber)
             {
@@ -69,8 +64,7 @@ namespace Bisection
                 machineNumber = array[array.Length / 4];
             }
 
-
-            for (int i = 0; i < array.Length/2; i++)
+            for (var i = 0; i < array.Length/2; i++)
             {
                 tempArray[i] = array[indexBuffer];
                 indexBuffer++;
@@ -82,7 +76,7 @@ namespace Bisection
 
             Console.WriteLine($"current array length: {array.Length}, machineNumber: {machineNumber}, count: {count}");
 
-            return Search(tempArray, count, humanNumber, machineNumber);
+            return Search(tempArray, count, humanNumber);
         }
 
         private string MachinePickMenu(int count = 1, int machineNumber = 0)
@@ -100,18 +94,12 @@ namespace Bisection
             var input = Convert.ToInt32(Console.ReadLine());
 
             if (input == machineNumber)
-            {
                 return $"You guessed machine's number :{input}, in {count} attempts.";
-            }
 
             else if (input > machineNumber)
-            {
                 Console.WriteLine("Too big");
-            }
             else
-            {
                 Console.WriteLine("Too small");
-            }
 
             count++;
 
