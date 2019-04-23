@@ -70,8 +70,6 @@ namespace Bisection
                 indexBuffer++;
             }
 
-            
-
             count++;
 
             Console.WriteLine($"current array length: {array.Length}, machineNumber: {machineNumber}, count: {count}");
@@ -79,8 +77,10 @@ namespace Bisection
             return Search(tempArray, count, humanNumber);
         }
 
+        //Recursive method, but much simpler, since the only parameter we are passing is count and current random picked number
         private string MachinePickMenu(int count = 1, int machineNumber = 0)
         {
+            //Check for initial count, to avoid reinitializing random variable
             if (count == 1)
             {
                 Console.Clear();
